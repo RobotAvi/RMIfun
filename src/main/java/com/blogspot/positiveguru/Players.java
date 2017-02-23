@@ -1,9 +1,7 @@
 package com.blogspot.positiveguru;
 
-import java.io.File;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.*;
 
 /*
@@ -13,7 +11,7 @@ import java.rmi.registry.*;
 
 
 public class Players {
-    static boolean initiator = true;
+    private static boolean initiator = true;
 
     public static void main(String args[]) {
         //Prepare RMI environment
@@ -63,13 +61,13 @@ public class Players {
 
             String msg = "Hello, player!";
             obj.setMessage(msg);
-            int countRecieve = 0;
+            int countReceive = 0;
 
             System.out.println("PeerServer bound in registry");
 
-            while (countRecieve < 10) {
+            while (countReceive < 10) {
                 if (!msg.equals(obj.getMessage())) {
-                    countRecieve++;
+                    countReceive++;
                     System.out.println("Received msg:" + obj.getMessage());
                     obj.setMessage(msg);
                 }
@@ -86,16 +84,16 @@ public class Players {
     private static void doItLikePlayer2() {
         try {
             PlayersRemoteInterface obj = (PlayersRemoteInterface) Naming.lookup("//localhost/PlayersChat");
-            int countRecieve = 1;
+            int countReceive = 1;
             String message = obj.getMessage();
-            obj.setMessage(message + countRecieve);
-            System.out.println("Recieve msg number:" + countRecieve);
+            obj.setMessage(message + countReceive);
+            System.out.println("Receive msg number:" + countReceive);
 
-            while (countRecieve < 10) {
+            while (countReceive < 10) {
                 if (obj.getMessage().equals(message)) {
-                    countRecieve++;
-                    System.out.println("Recieve msg number:" + countRecieve);
-                    obj.setMessage(message + countRecieve);
+                    countReceive++;
+                    System.out.println("Receive msg number:" + countReceive);
+                    obj.setMessage(message + countReceive);
                 }
 
             }

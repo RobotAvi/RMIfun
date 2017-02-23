@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class PlayersMessage extends UnicastRemoteObject implements PlayersRemoteInterface {
-    String msg = "";
+    private String msg = "";
 
     PlayersMessage() throws RemoteException {
     }
