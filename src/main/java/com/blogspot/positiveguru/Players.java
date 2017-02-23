@@ -1,5 +1,6 @@
 package com.blogspot.positiveguru;
 
+import java.io.File;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -30,7 +31,8 @@ public class Players {
 
 
     private static void init() {
-        System.setProperty("java.security.policy", "file:///" + Players.class.getClassLoader().getResource("policy").getPath());
+
+      //  System.setProperty("java.security.policy", "file:///" + Players.class.getClassLoader().getResource("policy").getPath());
         System.out.println("RMI server started");
 
         // Create and install a security manager
@@ -69,9 +71,9 @@ public class Players {
                 if (!msg.equals(obj.getMessage())) {
                     countRecieve++;
                     System.out.println("Received msg:" + obj.getMessage());
-                     obj.setMessage(msg);
+                    obj.setMessage(msg);
                 }
-                Thread.sleep(100);
+                Thread.sleep(1000);
             }
         } catch (Exception e) {
             System.err.println("RMI server exception:" + e);
@@ -89,11 +91,11 @@ public class Players {
             obj.setMessage(message + countRecieve);
             System.out.println("Recieve msg number:" + countRecieve);
 
-            while (countRecieve<10){
-                if (obj.getMessage().equals(message)){
+            while (countRecieve < 10) {
+                if (obj.getMessage().equals(message)) {
                     countRecieve++;
                     System.out.println("Recieve msg number:" + countRecieve);
-                    obj.setMessage(message+countRecieve);
+                    obj.setMessage(message + countRecieve);
                 }
 
             }
